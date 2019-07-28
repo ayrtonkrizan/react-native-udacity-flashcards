@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import { Tabs } from './Tabs';
 import { darkPrimaryColor, textprimaryColor } from '../utils/colors';
-import { DeckScreen, AddCardScreen } from '../scenes'
+import { DeckScreen, AddCardScreen, QuizScreen } from '../scenes'
 
 export const MainNavigator = createStackNavigator(
 	{
@@ -21,6 +21,12 @@ export const MainNavigator = createStackNavigator(
 			screen: DeckScreen,
 			navigationOptions: {
 				title: 'Deck'
+			}
+		},
+		Quiz: {
+			screen: QuizScreen,
+			navigationOptions: {
+				title: 'Quiz'
 			}
 		}
 	},
