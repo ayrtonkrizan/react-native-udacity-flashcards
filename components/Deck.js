@@ -50,6 +50,9 @@ export const Deck = ({ deck, onPress, deckStyle, children }) => (
 				<Text style={styles.cardsNumber}>
 					{`${deck.cards.length} card${deck.cards.length !==1?'s':''}`}
 				</Text>
+				<Text style={styles.cardsNumber}>
+					{deck.quiz && `Last result: ${deck.quiz.score} of ${deck.quiz.cardsTotal}`}
+				</Text>
 				{children}
 			</View>
 		</View>

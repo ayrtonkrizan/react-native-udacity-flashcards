@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Card, Button } from '../components';
 import { backGroundColor, warningColor, white } from '../utils/colors';
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
+import { saveScore } from '../store/actions';
 
 class QuizScreen extends Component {
 
@@ -13,11 +14,10 @@ class QuizScreen extends Component {
 		score: 0
 	};
 
-	componentDidMount = async () => {
-		await clearLocalNotification();
-		setLocalNotification();
-	}
-
+	// componentDidMount = async () => {
+	// 	await clearLocalNotification();
+	// 	setLocalNotification();
+	// }
 	initializeQuiz = () => {
 		this.setState({
 			flipped: false,
@@ -29,6 +29,8 @@ class QuizScreen extends Component {
 
 	showScore = () => {
 		const { score } = this.state;
+		const { cardsTotal, currentDeck, saveScore } = this.props;
+		saveScore({ deckID: currentDeck, quiz:{ score, cardsTotal } });
 		Alert.alert('Oww!', score, [
 			{ text: 'Try Again', onPress: this.initializeQuiz },
 			{ text: 'Go Home', onPress: () => this.props.navigation.navigate('Home') }
@@ -104,11 +106,12 @@ const mapStateToProps = ({ decks, currentDeck }) => {
 	const { cards } = decks[currentDeck];
 	return {
 		cards,
-		cardsTotal: cards.length
+		cardsTotal: cards.length,
+		currentDeck
 	};
 };
 
-export default connect(mapStateToProps)(QuizScreen);
+export default connect(mapStateToProps, {saveScore})(QuizScreen);
 
 
 const styles = StyleSheet.create({

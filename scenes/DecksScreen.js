@@ -25,7 +25,6 @@ class DecksScreen extends Component {
 	
 	render() {
 		const { decks } = this.props;
-		console.log(decks)
 		if(!decks)
 			return <NoDeckView />
 		if(!Object.keys(decks).length)

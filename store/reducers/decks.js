@@ -1,4 +1,4 @@
-import { STORE_DECK, STORE_CARD, SET_CURRENT_DECK, DELETE_DECK } from '../actions';
+import { STORE_DECK, STORE_CARD, SET_CURRENT_DECK, DELETE_DECK, SAVE_SCORE } from '../actions';
 
 const INITIAL_STATE = {
 	decks: {},
@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
 	const { payload } = action;
+	console.log(action.type);
 	switch (action.type) {
 		case STORE_DECK:
 			return {
@@ -31,6 +32,17 @@ export default (state = INITIAL_STATE, action) => {
 					}
 				}
 			};
+		case SAVE_SCORE:
+			return{
+				...state,
+				decks:{
+					...state.decks,
+					[payload.deckID]:{
+						...state.decks[payload.deckID],
+						quiz: payload.quiz
+					}
+				}
+			}
 		case SET_CURRENT_DECK:
 			return {
 				...state,

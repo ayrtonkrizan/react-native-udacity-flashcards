@@ -2,6 +2,7 @@ export const  STORE_DECK = 'STORE_DECK';
 export const  STORE_CARD  = 'STORE_CARD';
 export const  DELETE_DECK  = 'DELETE_DECK';
 export const  SET_CURRENT_DECK  = 'SET_CURRENT_DECK';
+export const SAVE_SCORE = 'SAVE_SCORE';
 
 export const createDeck = deckID => dispatch =>
 	dispatch({
@@ -26,3 +27,10 @@ export const removeDeck = deckID => dispatch =>
 		type: DELETE_DECK,
 		payload: deckID
 	});
+
+export const saveScore = quiz => dispatch =>{
+	dispatch({
+		type: SAVE_SCORE,
+		payload: {...quiz}
+	})
+}
