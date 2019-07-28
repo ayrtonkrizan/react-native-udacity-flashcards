@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text } from 'react-native';
 import { backGroundColor } from '../utils/colors';
-// import { Deck } from '../components';
+import { Deck } from '../components';
 
 export default class DecksScreen extends Component {
 
@@ -10,7 +10,7 @@ export default class DecksScreen extends Component {
 	};
 
 	render() {
-		const  decks = {"a": {title:"A"}, "b": {title:"B"}}
+		const  decks = {"a": {id: "abc", title:"A", questions:[]}, "b": {id: "cde", title:"B", questions:[]}}
 		return (
 			<ScrollView
 				style={styles.scrollStyle}
@@ -19,7 +19,11 @@ export default class DecksScreen extends Component {
             {
                 Object.values(decks)
                     .map(deck => (
-                        <Text key={deck.title}>{deck.title}</Text>
+                        <Deck 
+                            key={deck.id}
+                            deck={deck}
+                            onPress={this.handleDeckPress(deck.id)}
+                        />
                         )
                     )
             }

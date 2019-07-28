@@ -21,20 +21,15 @@ const styles = StyleSheet.create({
 	}
 });
 
-const handleCardsText = (cardsNumber) => (
-	cardsNumber > 1 ? `${cardsNumber} cards` : `${cardsNumber} card`
-);
-
-export const Deck = ({ deck, onPress, deckStyle, children }) => (
+export const Deck = ({ deck, onPress, deckStyle }) => (
 	<TouchableOpacity onPress={onPress}>
 		<View style={[styles.deckContainer, deckStyle]}>
 			<Text style={styles.title}>
 				{deck.title}
 			</Text>
 			<Text style={styles.cardsNumber}>
-				{handleCardsText(deck.questions.length)}
+				3 cards
 			</Text>
-			{children}
 		</View>
 	</TouchableOpacity>
 );
