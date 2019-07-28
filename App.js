@@ -5,6 +5,7 @@ import { StyleSheet, View, StatusBar } from 'react-native';
 import { MainNavigator } from './navigation/MainNavigator';
 import { store, persistor } from './store/store';
 import {createAppContainer} from'react-navigation'
+import { setLocalNotification } from './utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +16,10 @@ const styles = StyleSheet.create({
 const AppContainer = createAppContainer(MainNavigator);
 
 export default class App extends React.Component  {
+  componentDidMount () {
+		setLocalNotification();
+  }
+  
   render(){ 
     return(
       <Provider store={store}>

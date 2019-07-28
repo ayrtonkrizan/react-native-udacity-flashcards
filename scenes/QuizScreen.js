@@ -3,6 +3,7 @@ import { StyleSheet, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Button } from '../components';
 import { backGroundColor } from '../utils/colors';
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 class QuizScreen extends Component {
 
@@ -11,6 +12,11 @@ class QuizScreen extends Component {
 		cardIndex: 0,
 		score: 0
 	};
+
+	componentDidMount = async () => {
+		await clearLocalNotification();
+		setLocalNotification();
+	}
 	
 	initializeQuiz = () =>{
 		this.setState({

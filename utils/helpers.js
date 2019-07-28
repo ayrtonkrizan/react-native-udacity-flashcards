@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { Notifications, Permissions } from 'expo';
 
-const NOTIFICATION_KEY = 'UdaciCards:notifications';
+const NOTIFICATION_KEY = 'FlashCards:notifications';
 
 export const clearLocalNotification = async () => {
 	await AsyncStorage.removeItem(NOTIFICATION_KEY);
@@ -10,7 +10,7 @@ export const clearLocalNotification = async () => {
 
 const createNotification = () => ({
 	title: 'Hello!!',
-	body: ' Let\'s to study today?',
+	body: " Let's study today?",
 	ios: {
 		sound: true,
 	},
@@ -35,6 +35,7 @@ export const setLocalNotification = async () => {
 			let tomorrow = new Date();
 			tomorrow.setDate(tomorrow.getDate() + 1);
 			Notifications.scheduleLocalNotificationAsync(
+				/// TODO: Refactor because this will be deprecated in next iOS sdk. 
 				createNotification(),
 				{
 					time: tomorrow,
