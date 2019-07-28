@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, TextInput as Input } from 'react-native';
 import PropTypes from 'prop-types';
-import { textprimaryColor } from '../utils/colors';
+import { textSecondColor } from '../utils/colors';
 
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		color: textprimaryColor,
-		backgroundColor: '#4c4c4c',
+		color: textSecondColor,
+		backgroundColor: '#fff',
 		margin: 25,
 		borderRadius: 4,
 		padding: 8,

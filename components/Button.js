@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center'
 	},
 	disabled: {
-		backgroundColor: '#808080',
+		backgroundColor: 'rgba(25, 111,61, 0.4)',
 	},
 	setMargin: {
 		marginLeft: 25,

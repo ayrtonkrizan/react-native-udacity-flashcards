@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { black, backGroundColor, textprimaryColor } from '../utils/colors';
+import { black, backGroundColor } from '../utils/colors';
 import { TextInput, Button } from '../components';
+import { createCard } from '../store/actions';
 
 const INPUT_FONT_SIZE = 20;
 const QUESTION = 'question';
@@ -10,22 +11,25 @@ const ANSWER = 'answer';
 
 
 class AddCardScreen extends Component {
-    state = {
-        question:'',
-        answer:''
-    }
-    handleSubmit = () => {
-        console.log('here')
-    }
+	state = {
+		question: '',
+		answer: ''
+	}
+	handleSubmit = () => {
+		const { createCard, navigation, currentDeck } = this.props;
+		const card = { ...this.state };
+		createCard({ deckID: currentDeck, card });
+		navigation.goBack();
+	}
 
-    handleTextChange = field => text => {
-        console.log()
-    }
+	handleTextChange = field => text => {
+		this.setState({ [field]: text });
+	}
 
-    render(){
-        const { question, answer } = this.state;
-        return(
-            <View style={styles.container}>
+	render() {
+		const { question, answer } = this.state;
+		return (
+			<View style={styles.container}>
 				<Text style={styles.text}>Enter a question:</Text>
 				<TextInput
 					onChangeText={this.handleTextChange(QUESTION)}
@@ -48,8 +52,8 @@ class AddCardScreen extends Component {
 					setMargin
 				/>
 			</View>
-        )
-    }
+		)
+	}
 }
 
 const styles = StyleSheet.create({
@@ -66,6 +70,6 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToPros = ({decks}) => ({decks});
+const mapStateToPros = ({ currentDeck }) => ({ currentDeck });
 
-export default connect(mapStateToPros)(AddCardScreen);
+export default connect(mapStateToPros, { createCard })(AddCardScreen);
