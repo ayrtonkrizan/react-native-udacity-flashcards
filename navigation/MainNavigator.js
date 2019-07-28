@@ -8,7 +8,7 @@ export const MainNavigator = createStackNavigator(
 		Home: {
 			screen: Tabs,
 			navigationOptions: {
-				title: 'Cards'
+				title: 'Decks'
 			}
 		},
 		AddCard: {

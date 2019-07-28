@@ -2,7 +2,7 @@
 
 This application is a flashcard store that his users are able to create new flash cards, organize in decks and play quiz inside dekcs;
 
-This project was built using `create-react-native-app` and Redux & Thunks to store data for the Udacity React Nanodegree Program.
+This project was built using `create-react-native-app`, Redux and Thunks to store data for the Udacity React Nanodegree Program.
 
 
 ## How to run the Project

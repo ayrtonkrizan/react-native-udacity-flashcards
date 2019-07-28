@@ -3,7 +3,7 @@ import { StyleSheet, View, Alert, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Deck, Button } from '../components';
-import { backGroundColor, textprimaryColor, white } from '../utils/colors';
+import { backGroundColor, textprimaryColor, textSecondColor, white } from '../utils/colors';
 import { removeDeck } from '../store/actions';
 
 const styles = StyleSheet.create({
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	startLabel: {
-		color: textprimaryColor,
+		color: textSecondColor,
 		fontSize: 23,
 		textAlign: 'center',
 		padding: 10
@@ -65,7 +65,7 @@ class DeckScreen extends Component {
 								<MaterialCommunityIcons
 									name='cards-outline'
 									size={45}
-									color={white}
+									color={backGroundColor}
 								/>
 							</View>
 						</Deck>

@@ -29,17 +29,18 @@ const styles = StyleSheet.create({
 	}
 });
 
-export const Button = ({ label, onPress, disabled = false, setMargin }) => (
+export const Button = ({ label, onPress, disabled = false, setMargin, styleBtn, styleLabel }) => (
 	<TouchableOpacity
 		onPress={onPress}
 		style={[styles.container,
 			disabled && styles.disabled,
-			setMargin && styles.setMargin
+			setMargin && styles.setMargin,
+			styleBtn
 		]}
 		disabled={disabled}
 	>
 		<Text
-			style={styles.label}
+			style={[styles.label, styleLabel]}
 		>
 			{label}
 		</Text>

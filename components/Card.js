@@ -1,40 +1,46 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { textprimaryColor, defaultPrimaryColor, white } from '../utils/colors';
+import { textprimaryColor, textSecondColor, defaultPrimaryColor, white, black } from '../utils/colors';
 
 const styles = StyleSheet.create({
 	container: {
-		paddingTop: 15,
-		backgroundColor: defaultPrimaryColor,
-		alignItems: 'center',
-		justifyContent: 'center',
-		borderRadius: 5,
+		alignItems: 'stretch',
+		justifyContent: 'flex-start',
 		margin: 10,
-		flex: 1
+		minHeight: 500,
 	},
 	title: {
 		color: textprimaryColor,
-		fontSize: 28,
-		textAlign: 'center',
-		padding: 10
+		fontSize: 30
 	},
 	titleContainer: {
-		flex: 3,
+		backgroundColor: defaultPrimaryColor,
 		alignItems: 'center',
-		justifyContent: 'center'
+		borderTopRightRadius: 5,
+		borderTopLeftRadius: 5,
+		maxHeight: 40,
+		shadowOffset: { width: 2, height: 2 },
+		shadowColor: black,
+		shadowOpacity: 0.4,
+		elevation: 5,
+		flex: 1,
+		zIndex: 5
 	},
 	turnLabel: {
-		color: textprimaryColor,
-		fontSize: 23,
-		textAlign: 'center',
-		padding: 10
+		color: textSecondColor,
+		fontSize: 23
 	},
 	turnContainer: {
-		flex: 1,
-		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center'
+		backgroundColor: white,
+		justifyContent: 'space-between',
+		minHeight: 300,
+		flex: 2,
+		paddingTop: 25,
+		paddingBottom: 25,
+		paddingLeft: 15,
+		paddingRight: 15,
 	}
 });
 
@@ -42,29 +48,27 @@ export const Card = ({
 	text,
 	onPress,
 	children,
-	questionNumber,
-	questionsTotal,
+	cardNumber,
+	cardsTotal,
 	nextCardType
 }) => (
-	<TouchableOpacity onPress={onPress} style={styles.container}>
-		<Text style={styles.title}>
-			{questionNumber} | {questionsTotal}
-		</Text>
-		<View style={styles.titleContainer}>
-			<Text style={styles.title}>{text}</Text>
-		</View>
-		<View style={{ flex: 1 }}>
-			{children}
-		</View>
-		<View style={styles.turnContainer}>
-			<Text style={styles.turnLabel}>
-					Show {nextCardType}
-			</Text>
-			<Feather
-				name='refresh-ccw'
-				size={30}
-				color={white}
-			/>
-		</View>
-	</TouchableOpacity>
-);
+		<TouchableOpacity style={{flex:1}}onPress={onPress}>
+			<View style={[styles.container]}>
+				<View style={styles.titleContainer}>
+					<Text style={styles.title}>{cardNumber} | {cardsTotal}</Text>
+				</View>
+				<View style={styles.turnContainer}>
+					<Text style={styles.turnLabel}>{text}</Text>
+					{children}
+					<View style={{flexDirection:"row"}}>
+						<Feather
+							name='refresh-ccw'
+							size={30}
+							color={defaultPrimaryColor}
+						/>
+						<Text style={styles.turnLabel}>Show {nextCardType}</Text>
+					</View>
+				</View>
+			</View>
+		</TouchableOpacity>
+	);

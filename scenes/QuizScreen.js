@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Button } from '../components';
-import { backGroundColor } from '../utils/colors';
+import { backGroundColor, warningColor, white } from '../utils/colors';
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 class QuizScreen extends Component {
@@ -17,8 +17,8 @@ class QuizScreen extends Component {
 		await clearLocalNotification();
 		setLocalNotification();
 	}
-	
-	initializeQuiz = () =>{
+
+	initializeQuiz = () => {
 		this.setState({
 			flipped: false,
 			cardIndex: 0,
@@ -30,9 +30,9 @@ class QuizScreen extends Component {
 	showScore = () => {
 		const { score } = this.state;
 		Alert.alert('Oww!', score, [
-			{text: 'Try Again', onPress: this.initializeQuiz },
-			{text: 'Go Home', onPress: () => this.props.navigation.navigate('Home') }
-		] );
+			{ text: 'Try Again', onPress: this.initializeQuiz },
+			{ text: 'Go Home', onPress: () => this.props.navigation.navigate('Home') }
+		]);
 	}
 
 	handleScore = (point) => {
@@ -70,38 +70,31 @@ class QuizScreen extends Component {
 
 		return (
 			<View style={styles.container}>
-				{!this.state.flipped ? (
-					<View style={styles.cardContainer}>
-						<Card
-							text={card.question}
-							onPress={this.handleFlip}
-							cardsTotal={cardsTotal}
-							cardNumber={cardNumber}
-							nextCardType="Answer"
-						/>
-					</View>
-				) : (
-						<View style={styles.cardContainer}>
-							<Card
-								text={card.answer}
-								onPress={this.handleFlip}
-								cardsTotal={cardsTotal}
-								cardNumber={cardNumber}
-								nextCardType="card"
-							>
-								<View style={styles.btnContainer}>
-									<Button
-										label="Got it! 🤓"
-										onPress={() => this.handleAnswer(true)}
-									/>
-									<Button
-										label="Oops! 😭"
-										onPress={() => this.handleAnswer(false)}
-									/>
-								</View>
-							</Card>
-						</View>
-					)}
+				<View style={styles.cardContainer}>
+					<Card
+						text={this.state.flipped ? card.answer : card.question}
+						onPress={this.handleFlip}
+						cardsTotal={cardsTotal}
+						cardNumber={cardNumber}
+						nextCardType={this.state.flipped ? "Card" : "Answer"}
+					>
+						{this.state.flipped && 
+							<View>
+								<Button
+									label="Yeah, Got it!"
+									onPress={() => this.handleAnswer(true)}
+									styleBtn={{ backgroundColor: white, borderColor: backGroundColor, border: 2 }}
+									styleLabel={{ color: backGroundColor }}
+								/>
+								<Button
+									label="Oops!"
+									onPress={() => this.handleAnswer(false)}
+									styleBtn={{ backgroundColor: warningColor }}
+								/>
+							</View>
+						}
+					</Card>
+				</View>
 			</View>
 		);
 	}
@@ -109,7 +102,7 @@ class QuizScreen extends Component {
 
 const mapStateToProps = ({ decks, currentDeck }) => {
 	const { cards } = decks[currentDeck];
-	return { 
+	return {
 		cards,
 		cardsTotal: cards.length
 	};
