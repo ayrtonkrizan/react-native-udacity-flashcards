@@ -14,10 +14,11 @@ class QuizScreen extends Component {
 		score: 0
 	};
 
-	// componentDidMount = async () => {
-	// 	await clearLocalNotification();
-	// 	setLocalNotification();
-	// }
+	componentDidMount = async () => {
+		await clearLocalNotification();
+		setLocalNotification();
+	}
+	
 	initializeQuiz = () => {
 		this.setState({
 			flipped: false,
