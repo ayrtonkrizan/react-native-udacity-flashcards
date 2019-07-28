@@ -1,13 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Tabs } from './navigation/Tabs';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Teste 1</Text>
-    </View>
-  );
-}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -17,3 +13,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+// export default function App() {
+//   return (
+//     <View style={styles.container}>
+//       <Tabs />
+//     </View>
+//   );
+// }
+
+export default createAppContainer(Tabs)
