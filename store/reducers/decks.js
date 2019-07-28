@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
 					...state.decks,
 					[payload]: {
 						title: payload,
-						questions: []
+						cards: []
 					}
 				},
 				currentDeck: payload
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
 					...state.decks,
 					[payload.deckID]: {
 						...state.decks[payload.deckID],
-						questions: [...state.decks[payload.deckID].questions, payload.card]
+						cards: [...state.decks[payload.deckID].cards, payload.card]
 					}
 				}
 			};

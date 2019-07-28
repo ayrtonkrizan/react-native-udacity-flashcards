@@ -1,66 +1,77 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { black, backGroundColor, textprimaryColor } from '../utils/colors';
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import { connect } from 'react-redux';
+import { createDeck } from '../store/actions';
+import {
+	backGroundColor,
+	textSecondColor
+} from '../utils/colors';
 import { TextInput, Button } from '../components';
-
-const INPUT_FONT_SIZE = 20;
-const QUESTION = 'question';
-const ANSWER = 'answer';
-
-
-export default class AddDecksScreen extends Component {
-    state = {
-        question:'',
-        answer:''
-    }
-    handleSubmit = () => {
-        console.log('here')
-    }
-
-    handleTextChange = field => text => {
-        console.log()
-    }
-
-    render(){
-        const { question, answer } = this.state;
-        return(
-            <View style={styles.container}>
-				<Text style={styles.text}>Enter a question:</Text>
-				<TextInput
-					onChangeText={this.handleTextChange(QUESTION)}
-					value={question}
-					multiline
-					fontSize={INPUT_FONT_SIZE}
-				/>
-				<Text style={styles.text}>What is the answer?</Text>
-				<TextInput
-					onChangeText={this.handleTextChange(ANSWER)}
-					value={answer}
-					multiline
-					fontSize={INPUT_FONT_SIZE}
-					autoFocus={false}
-				/>
-				<Button
-					onPress={this.handleSubmit}
-					label="Submit"
-					disabled={!question || !answer}
-					setMargin
-				/>
-			</View>
-        )
-    }
-}
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: backGroundColor
+		backgroundColor: backGroundColor,
+		justifyContent: 'flex-start'
 	},
 	text: {
-		paddingTop: 20,
-		paddingLeft: 25,
-		color: black,
-		fontSize: 30,
-		textAlign: 'left'
+		padding: 25,
+		color: textSecondColor,
+		fontSize: 35,
+		textAlign: 'center'
 	}
 });
+
+
+class AddDecksScreen extends Component {
+	
+	state = {
+		deckTitle: ''
+	};
+
+	handleTextChange = deckTitle => {
+		this.setState({ deckTitle });
+	};
+
+	clearName = () => this.setState({ deckTitle: '' })
+
+	handleCreateDeck = () => {
+		const { deckTitle } = this.state;
+		const { createDeck, navigation, decks } = this.props;
+		
+		if(decks[deckTitle]) {
+			Alert.alert("Ops!", "This Deck Name already exists! Choose a different name");
+			return;
+		}
+		createDeck(deckTitle);
+		this.clearName();
+		navigation.navigate('Deck');
+	};
+
+	render() {
+		const { deckTitle } = this.state;
+		return (
+			<View style={styles.container}>
+				<Text style={styles.text}>
+					What is your new deck name?
+				</Text>
+				<TextInput
+					onChangeText={this.handleTextChange}
+					value={deckTitle}
+				/>
+				<Button
+					onPress={this.handleCreateDeck}
+					label="Create Deck"
+					disabled={!deckTitle}
+					setMargin
+				/>
+			</View>
+		);
+	}
+}
+
+const mapStateToProps = ({ decks }) => ({
+	 decks
+	});
+
+export default connect(mapStateToProps, { createDeck })(AddDecksScreen);

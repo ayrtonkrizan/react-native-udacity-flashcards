@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import { Tabs } from './Tabs';
 import { darkPrimaryColor, textprimaryColor } from '../utils/colors';
-
+import { DeckScreen } from '../scenes'
 
 export const MainNavigator = createStackNavigator(
 	{
@@ -10,7 +10,13 @@ export const MainNavigator = createStackNavigator(
 			navigationOptions: {
 				title: 'Cards'
 			}
-        }
+        },
+		Deck: {
+			screen: DeckScreen,
+			navigationOptions: {
+				title: 'Deck'
+			}
+		}
 	},
 	{
 		initialRouteName: 'Home',

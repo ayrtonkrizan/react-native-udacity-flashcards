@@ -5,4 +5,5 @@ export const grey = '#808080';
 export const darkPrimaryColor =  '#145A32';
 export const defaultPrimaryColor = '#1E8449';
 export const textprimaryColor = '#FFFFFF';
+export const textSecondColor = '#145A32';
 export const backGroundColor = '#D4EFDF';

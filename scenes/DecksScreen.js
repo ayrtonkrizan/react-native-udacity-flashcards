@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, Text } from 'react-native';
 import { backGroundColor } from '../utils/colors';
 import { Deck } from '../components';
+import { setCurrentDeck } from '../store/actions';
 
-export default class DecksScreen extends Component {
+class DecksScreen extends Component {
 
 	handleDeckPress = deckID => () => {
-        console.log('changing deck')
+        const { setCurrentDeck, navigation } = this.props;
+        setCurrentDeck(deckID);
+		navigation.navigate('Deck');
 	};
 
 	render() {
-		const  decks = {"a": {id: "abc", title:"A", cards:[1,2,3]}, "b": {id: "cde", title:"B", cards:[1]}}
+		const { decks } = this.props;
 		return (
 			<ScrollView
 				style={styles.scrollStyle}
@@ -20,9 +24,9 @@ export default class DecksScreen extends Component {
                 Object.values(decks)
                     .map(deck => (
                         <Deck 
-                            key={deck.id}
+                            key={deck.title}
                             deck={deck}
-                            onPress={this.handleDeckPress(deck.id)}
+                            onPress={this.handleDeckPress(deck.title)}
                         />
                         )
                     )
@@ -32,6 +36,9 @@ export default class DecksScreen extends Component {
 	}
 }
 
+const mapStateToProps = ({ decks }) => ({ decks });
+export default connect(mapStateToProps, {setCurrentDeck})(DecksScreen);
+
 const styles = StyleSheet.create({
 	scrollStyle: {
 		backgroundColor: backGroundColor
@@ -39,6 +46,6 @@ const styles = StyleSheet.create({
 	scrollContent: {
 		justifyContent: 'space-around',
 		backgroundColor: backGroundColor,
-		paddingTop: 5
+		paddingTop: 15
 	}
 });
