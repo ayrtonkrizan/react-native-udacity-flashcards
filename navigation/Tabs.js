@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import {  white, darkPrimaryColor } from '../utils/colors';
 import { MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
 import { AddDecksScreen, DecksScreen } from '../scenes';

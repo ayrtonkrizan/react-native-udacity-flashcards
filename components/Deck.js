@@ -28,7 +28,7 @@ export const Deck = ({ deck, onPress, deckStyle }) => (
 				{deck.title}
 			</Text>
 			<Text style={styles.cardsNumber}>
-				3 cards
+				{`${deck.cards.length} card${deck.cards.length !==1?'s':''}`}
 			</Text>
 		</View>
 	</TouchableOpacity>

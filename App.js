@@ -1,26 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Tabs } from './navigation/Tabs';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-
-
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { StyleSheet, View, StatusBar } from 'react-native';
+import { MainNavigator } from './navigation/MainNavigator';
+import { store, persistor } from './store/store';
+import {createAppContainer} from'react-navigation'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1
   },
 });
 
+const AppContainer = createAppContainer(MainNavigator);
 
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Tabs />
-//     </View>
-//   );
-// }
-
-export default createAppContainer(Tabs)
+export default class App extends React.Component  {
+  render(){ 
+    return(
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <View style={styles.container}>
+            <StatusBar barStyle="dark-content"/>
+            <AppContainer style={styles.container} />
+          </View>
+        </PersistGate>
+      </Provider>
+    )
+  }
+}

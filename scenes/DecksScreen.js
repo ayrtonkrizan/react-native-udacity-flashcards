@@ -10,7 +10,7 @@ export default class DecksScreen extends Component {
 	};
 
 	render() {
-		const  decks = {"a": {id: "abc", title:"A", questions:[]}, "b": {id: "cde", title:"B", questions:[]}}
+		const  decks = {"a": {id: "abc", title:"A", cards:[1,2,3]}, "b": {id: "cde", title:"B", cards:[1]}}
 		return (
 			<ScrollView
 				style={styles.scrollStyle}
